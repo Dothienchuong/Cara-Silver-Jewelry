@@ -1,0 +1,6 @@
+{
+  "name": "CARA Silver Jewelry",
+  "description": "Thương hiệu trang sức bạc 925 tối giản, sang trọng và unisex - Vòng tay, dây chuyền, nhẫn bạc cao cấp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
