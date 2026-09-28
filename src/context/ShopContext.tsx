@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, CartItem, Order, CustomerInfo, PaymentMethod } from '../types';
 import { INITIAL_PRODUCTS, VOUCHER_CODES } from '../data/products';
 import { generateOrderId } from '../utils/format';
+import { getAccessToken } from '../services/googleAuthService';
+import { getSavedSheetConfig, appendOrderToSheet } from '../services/googleSheetsService';
 
 export type ActiveTab =
   | 'home'
@@ -10,6 +12,7 @@ export type ActiveTab =
   | 'checkout'
   | 'order-success'
   | 'order-history'
+  | 'order-management'
   | 'about'
   | 'contact';
 
@@ -130,8 +133,8 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
   const cartSubtotal = cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
 
-  // Free shipping threshold: 1.000.000₫
-  const shippingFee = cartSubtotal >= 1000000 || cartSubtotal === 0 ? 0 : 30000;
+  // Free shipping threshold: 350.000₫ (Đơn hàng từ 350k được miễn phí vận chuyển toàn quốc)
+  const shippingFee = cartSubtotal >= 350000 || cartSubtotal === 0 ? 0 : 25000;
 
   // Discount calculation
   let discountAmount = 0;
@@ -231,6 +234,20 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLatestOrder(newOrder);
     clearCart();
     setActiveTab('order-success');
+
+    // Asynchronously push to Google Sheets if connected
+    (async () => {
+      try {
+        const token = await getAccessToken();
+        const config = getSavedSheetConfig();
+        if (token && config?.spreadsheetId && config.autoSync !== false) {
+          await appendOrderToSheet(token, config.spreadsheetId, newOrder);
+        }
+      } catch (err) {
+        console.warn('Background sync to Google Sheets failed:', err);
+      }
+    })();
+
     return newOrder;
   };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparkles, Shield, Compass, Gem } from 'lucide-react';
 import { Logo } from '../components/Logo';
+import caraVt04Image from '../assets/images/regenerated_image_1790216696616.jpg';
 
 export const AboutView: React.FC = () => {
   return (
@@ -23,7 +24,7 @@ export const AboutView: React.FC = () => {
       {/* Editorial Image Banner */}
       <div className="relative aspect-[21/9] rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl">
         <img
-          src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=80"
+          src={caraVt04Image}
           alt="CARA Silver Jewelry Atelier"
           className="w-full h-full object-cover filter contrast-105"
         />

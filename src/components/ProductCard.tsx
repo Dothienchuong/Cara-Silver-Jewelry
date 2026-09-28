@@ -50,19 +50,26 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Tags / Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10 pointer-events-none">
-          {product.isBestSeller && (
+          {product.isNew && (
             <span className="px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-white text-zinc-950 rounded shadow-sm">
+              Mới Ra Mắt
+            </span>
+          )}
+          {product.coupleItem && (
+            <span className="px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-rose-600/90 text-white rounded shadow-sm">
+              Lắc Đôi
+            </span>
+          )}
+          {product.isBestSeller && !product.isNew && (
+            <span className="px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-zinc-200 text-zinc-950 rounded shadow-sm">
               Bán Chạy
             </span>
           )}
-          {product.isNew && (
-            <span className="px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-zinc-800/90 backdrop-blur-sm text-zinc-200 border border-zinc-700 rounded shadow-sm">
-              Mới
+          {(product.sku || product.modelCode) && (
+            <span className="px-2 py-0.5 text-[9px] font-bold tracking-widest bg-zinc-900/90 text-amber-300 border border-zinc-700/80 rounded uppercase">
+              {product.sku || product.modelCode}
             </span>
           )}
-          <span className="px-2 py-0.5 text-[9px] font-semibold tracking-wider bg-black/60 backdrop-blur-sm text-zinc-300 border border-zinc-800 rounded">
-            S925
-          </span>
         </div>
 
         {/* Quick View Floating Action */}
@@ -115,8 +122,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div>
           {/* Category & Rating */}
           <div className="flex items-center justify-between text-xs text-zinc-400 mb-1.5">
-            <span className="uppercase tracking-wider text-[11px] text-zinc-500 font-medium">
-              {product.categoryName}
+            <span className="uppercase tracking-wider text-[11px] text-zinc-400 font-medium">
+              {product.categoryName} {product.sku ? `• ${product.sku}` : product.modelCode ? `• ${product.modelCode}` : ''}
             </span>
             <div className="flex items-center gap-1 text-zinc-300">
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
@@ -139,12 +146,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Pricing & Mobile Add Button */}
         <div className="pt-2 border-t border-zinc-800/60 flex items-center justify-between">
           <div className="flex flex-col">
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-baseline gap-1.5">
               <span className="text-base font-semibold text-white tracking-tight">
                 {formatVND(product.price)}
               </span>
+              {product.coupleItem && (
+                <span className="text-xs text-rose-300 font-medium">
+                  / cặp
+                </span>
+              )}
               {product.originalPrice && (
-                <span className="text-xs text-zinc-500 line-through">
+                <span className="text-xs text-zinc-500 line-through ml-1">
                   {formatVND(product.originalPrice)}
                 </span>
               )}

@@ -1,9 +1,9 @@
-export type ProductCategory = 'all' | 'vong-tay' | 'day-chuyen' | 'nhan' | 'khuyen-tai';
+export type ProductCategory = 'all' | 'vong-tay' | 'lac-tay';
 
 export interface Product {
   id: string;
   name: string;
-  category: 'vong-tay' | 'day-chuyen' | 'nhan' | 'khuyen-tai';
+  category: 'vong-tay' | 'lac-tay';
   categoryName: string;
   price: number;
   originalPrice?: number;
@@ -16,6 +16,11 @@ export interface Product {
   tags: string[];
   isBestSeller?: boolean;
   isNew?: boolean;
+  modelCode?: string;
+  sku?: string;
+  coupleItem?: boolean;
+  engravingOption?: boolean;
+  seoKeywords?: string[];
   specifications: {
     purity: string;
     finish: string;

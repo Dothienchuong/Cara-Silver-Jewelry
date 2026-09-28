@@ -32,78 +32,120 @@ export const ContactView: React.FC = () => {
       {/* Header */}
       <div className="text-center space-y-2 max-w-xl mx-auto">
         <span className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-bold">
-          Hệ Thống Showroom & Dịch Vụ
+          Địa Chỉ & Liên Hệ Trực Tiếp
         </span>
         <h1 className="text-3xl sm:text-4xl font-bold font-brand text-white">
           Liên Hệ CARA Silver Jewelry
         </h1>
         <p className="text-xs sm:text-sm text-zinc-400">
-          Chúng tôi luôn sẵn sàng lắng nghe và giải đáp mọi thắc mắc của bạn về sản phẩm, chọn size hoặc chính sách bảo hành.
+          CARA Silver Jewelry hiện có địa chỉ và trung tâm trải nghiệm duy nhất tại TP. Hồ Chí Minh. Chúng tôi luôn sẵn sàng đón tiếp và tư vấn tận tâm cho quý khách.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left 5 Cols: Showrooms & Info */}
+        {/* Left 5 Cols: Showroom HCM & Direct Contact */}
         <div className="lg:col-span-5 space-y-6">
-          {/* Flagship Hanoi */}
-          <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
+          {/* Boutique HCMC Card */}
+          <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-4">
             <div className="flex items-center justify-between">
               <span className="px-2.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-white text-black">
-                Flagship Store Hà Nội
+                Showroom Duy Nhất Tại TP.HCM
               </span>
               <span className="text-[11px] text-zinc-400 flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" /> 09:00 - 21:30
+                <Clock className="w-3.5 h-3.5 text-zinc-400" /> 09:00 - 21:30 (Tất cả các ngày)
               </span>
             </div>
-            <h3 className="text-base font-bold text-white font-brand">
-              Showroom Phố Huế
-            </h3>
-            <p className="text-xs text-zinc-300 flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
-              <span>Số 88 Phố Huế, Phường Hàng Bài, Quận Hai Bà Trưng, Hà Nội</span>
-            </p>
-            <p className="text-xs text-zinc-400 flex items-center gap-2">
-              <Phone className="w-4 h-4 text-zinc-400 shrink-0" />
-              <span>Hotline HN: 024 3988 6828</span>
-            </p>
-          </div>
 
-          {/* Boutique HCMC */}
-          <div className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="px-2.5 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-white text-black">
-                Boutique TP. Hồ Chí Minh
-              </span>
-              <span className="text-[11px] text-zinc-400 flex items-center gap-1">
-                <Clock className="w-3.5 h-3.5" /> 09:00 - 21:30
-              </span>
+            <div>
+              <h3 className="text-lg font-bold text-white font-brand">
+                Showroom CARA TP. Hồ Chí Minh
+              </h3>
+              <p className="text-xs text-zinc-400 mt-1">
+                Không gian trưng bày, thử trực tiếp trang sức bạc Ý S925 và hỗ trợ đo ni tay chính xác.
+              </p>
             </div>
-            <h3 className="text-base font-bold text-white font-brand">
-              Showroom Nam Kỳ Khởi Nghĩa
-            </h3>
-            <p className="text-xs text-zinc-300 flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
-              <span>142 Nam Kỳ Khởi Nghĩa, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</span>
-            </p>
-            <p className="text-xs text-zinc-400 flex items-center gap-2">
-              <Phone className="w-4 h-4 text-zinc-400 shrink-0" />
-              <span>Hotline HCM: 028 3822 6828</span>
-            </p>
+
+            <div className="space-y-3.5 pt-2 border-t border-zinc-800/80">
+              <div className="text-xs text-zinc-300 flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-zinc-800/80 text-white shrink-0 mt-0.5">
+                  <MapPin className="w-4 h-4 text-emerald-400" />
+                </div>
+                <div>
+                  <strong className="text-white block font-medium">Địa chỉ:</strong>
+                  <span className="text-zinc-300">140 Lê Trọng Tấn, Phường Tây Thạnh, TP Hồ Chí Minh</span>
+                </div>
+              </div>
+
+              <div className="text-xs text-zinc-300 flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-zinc-800/80 text-white shrink-0 mt-0.5">
+                  <Phone className="w-4 h-4 text-amber-400" />
+                </div>
+                <div>
+                  <strong className="text-white block font-medium">Hotline HCM (Hỗ trợ 24/7):</strong>
+                  <a
+                    href="tel:0775610065"
+                    className="font-mono text-base font-bold text-white hover:text-amber-300 transition block mt-0.5"
+                  >
+                    0775610065
+                  </a>
+                  <span className="text-[11px] text-zinc-400 block">Zalo & Tư vấn đo size trực tiếp</span>
+                </div>
+              </div>
+
+              <div className="text-xs text-zinc-300 flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-zinc-800/80 text-white shrink-0 mt-0.5">
+                  <Mail className="w-4 h-4 text-sky-400" />
+                </div>
+                <div>
+                  <strong className="text-white block font-medium">Email chính thức:</strong>
+                  <span className="text-zinc-300">support@carajewelry.vn</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="pt-3 border-t border-zinc-800 flex gap-2.5">
+              <a
+                href="tel:0775610065"
+                className="flex-1 py-2.5 px-3 rounded-xl bg-white text-black text-center text-xs font-bold hover:bg-zinc-200 transition flex items-center justify-center gap-1.5 shadow-sm"
+              >
+                <Phone className="w-3.5 h-3.5" /> Gọi 0775610065
+              </a>
+              <a
+                href="https://maps.google.com/?q=140+Lê+Trọng+Tấn,+Phường+Tây+Thạnh,+TP+Hồ+Chí+Minh"
+                target="_blank"
+                rel="noreferrer"
+                className="flex-1 py-2.5 px-3 rounded-xl bg-zinc-800 text-white text-center text-xs font-semibold hover:bg-zinc-700 transition flex items-center justify-center gap-1.5"
+              >
+                <MapPin className="w-3.5 h-3.5" /> Xem Bản Đồ
+              </a>
+            </div>
           </div>
 
-          {/* Customer Care Channels */}
+          {/* Customer Care Box */}
           <div className="p-6 rounded-2xl bg-zinc-950 border border-zinc-800/80 space-y-3 text-xs text-zinc-400">
-            <h4 className="font-semibold text-white uppercase tracking-wider text-[11px]">
-              Kênh Chăm Sóc Trực Tuyến:
+            <h4 className="font-semibold text-white uppercase tracking-wider text-[11px] flex items-center gap-2">
+              <MessageSquare className="w-3.5 h-3.5 text-zinc-300" />
+              Dịch Vụ Tại Showroom TP. Hồ Chí Minh
             </h4>
-            <div className="flex items-center gap-2.5 text-zinc-300">
-              <Mail className="w-4 h-4 text-zinc-400" />
-              <span>Email: support@carajewelry.vn</span>
-            </div>
-            <div className="flex items-center gap-2.5 text-zinc-300">
-              <Phone className="w-4 h-4 text-zinc-400" />
-              <span>Tổng đài CSKH: 1900 6828 (Miễn phí cước)</span>
-            </div>
+            <ul className="space-y-2 text-zinc-300">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Thử mẫu trực tiếp, đo size cổ tay & ngón tay miễn phí</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Vệ sinh, đánh bóng bằng máy rung siêu âm lấy ngay</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Hỗ trợ khắc tên laser lấy ngay trong 15 phút</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Chỗ đỗ xe ô tô & xe máy an toàn, thuận tiện</span>
+              </li>
+            </ul>
           </div>
         </div>
 

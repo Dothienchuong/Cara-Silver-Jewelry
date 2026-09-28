@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Search, Menu, X, Clock, ShieldCheck, Truck, ChevronDown } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X, Clock, ShieldCheck, Truck, ChevronDown, FileSpreadsheet } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useShop, ActiveTab } from '../context/ShopContext';
 import { Logo } from './Logo';
@@ -46,9 +46,11 @@ export const Navbar: React.FC = () => {
           <div className="hidden sm:flex items-center gap-4 text-zinc-400">
             <span className="flex items-center gap-1">
               <Clock className="w-3 h-3 text-zinc-500" />
-              <span>Showroom: 09:00 - 21:30</span>
+              <span>Showroom HCM: 09:00 - 21:30</span>
             </span>
-            <span>Hotline: 1900 6828</span>
+            <a href="tel:0775610065" className="hover:text-white transition font-mono font-medium">
+              Hotline HCM: 0775610065
+            </a>
           </div>
         </div>
       </div>
@@ -123,14 +125,14 @@ export const Navbar: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute top-full left-0 w-52 py-2 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 rounded-lg shadow-xl shadow-black/50 z-50"
+                  className="absolute top-full left-0 w-60 py-2 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 rounded-lg shadow-xl shadow-black/50 z-50"
                 >
                   <button
                     type="button"
                     onClick={() => handleNavClick('catalog', 'all')}
                     className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition flex items-center justify-between"
                   >
-                    <span>Tất Cả Trang Sức</span>
+                    <span>Tất Cả Vòng & Lắc Tay</span>
                   </button>
                   <div className="h-[1px] bg-zinc-800 my-1 mx-2" />
                   <button
@@ -138,28 +140,14 @@ export const Navbar: React.FC = () => {
                     onClick={() => handleNavClick('catalog', 'vong-tay')}
                     className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition"
                   >
-                    Vòng Tay Bạc (Bracelets)
+                    Vòng Tay Bạc (Bangles & Cuffs)
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleNavClick('catalog', 'day-chuyen')}
+                    onClick={() => handleNavClick('catalog', 'lac-tay')}
                     className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition"
                   >
-                    Dây Chuyền Bạc (Necklaces)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleNavClick('catalog', 'nhan')}
-                    className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition"
-                  >
-                    Nhẫn Bạc Unisex (Rings)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleNavClick('catalog', 'khuyen-tai')}
-                    className="w-full text-left px-4 py-2 text-xs uppercase tracking-wider text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition"
-                  >
-                    Khuyên Tai Bạc (Earrings)
+                    Lắc Tay Bạc (Chains & Links)
                   </button>
                 </motion.div>
               )}
@@ -209,7 +197,7 @@ export const Navbar: React.FC = () => {
         </nav>
 
         {/* Right action controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Quick search button */}
           <button
             type="button"
@@ -220,6 +208,22 @@ export const Navbar: React.FC = () => {
             id="quick-search-btn"
           >
             <Search className="w-5 h-5" />
+          </button>
+
+          {/* Discreet Admin Portal Button */}
+          <button
+            type="button"
+            onClick={() => handleNavClick('order-management')}
+            className={`p-2 rounded-full transition ${
+              activeTab === 'order-management'
+                ? 'bg-zinc-800 text-amber-300 border border-amber-500/30'
+                : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/60'
+            }`}
+            title="Cổng Quản Trị Viên (Admin)"
+            aria-label="Cổng Quản Trị Viên"
+            id="admin-portal-nav-btn"
+          >
+            <ShieldCheck className="w-5 h-5" />
           </button>
 
           {/* Cart button with counter badge */}
@@ -263,36 +267,29 @@ export const Navbar: React.FC = () => {
             </button>
             <div className="py-1">
               <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold block mb-2">
-                Danh Mục Trang Sức
+                Bộ Sưu Tập Vòng & Lắc Tay
               </span>
               <div className="grid grid-cols-2 gap-2 pl-2">
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('catalog', 'all')}
+                  className="text-left py-1.5 text-zinc-300 hover:text-white text-xs"
+                >
+                  • Tất cả sản phẩm
+                </button>
                 <button
                   type="button"
                   onClick={() => handleNavClick('catalog', 'vong-tay')}
                   className="text-left py-1.5 text-zinc-300 hover:text-white text-xs"
                 >
-                  • Vòng tay bạc
+                  • Vòng tay bạc (Cuff & Bangle)
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleNavClick('catalog', 'day-chuyen')}
+                  onClick={() => handleNavClick('catalog', 'lac-tay')}
                   className="text-left py-1.5 text-zinc-300 hover:text-white text-xs"
                 >
-                  • Dây chuyền
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleNavClick('catalog', 'nhan')}
-                  className="text-left py-1.5 text-zinc-300 hover:text-white text-xs"
-                >
-                  • Nhẫn bạc
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleNavClick('catalog', 'khuyen-tai')}
-                  className="text-left py-1.5 text-zinc-300 hover:text-white text-xs"
-                >
-                  • Khuyên tai
+                  • Lắc tay bạc (Chain & Link)
                 </button>
               </div>
             </div>
@@ -314,11 +311,19 @@ export const Navbar: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleNavClick('order-history')}
-                className="text-left py-2 text-zinc-300 hover:text-white font-medium"
+                className="text-left py-2 text-zinc-300 hover:text-white font-medium border-b border-zinc-800/60"
               >
                 Tra cứu đơn hàng ({orders.length})
               </button>
             )}
+            <button
+              type="button"
+              onClick={() => handleNavClick('order-management')}
+              className="text-left pt-3 text-xs text-zinc-500 hover:text-zinc-300 font-medium flex items-center gap-2"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-zinc-500" />
+              <span>Cổng Quản Trị Viên (Admin)</span>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

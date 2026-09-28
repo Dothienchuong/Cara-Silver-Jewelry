@@ -1,8 +1,9 @@
 import React from 'react';
-import { Check, Package, Clock, MapPin, Phone, ArrowRight, Copy, CheckCheck, QrCode } from 'lucide-react';
+import { Check, Package, Clock, MapPin, Phone, ArrowRight, Copy, CheckCheck } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useShop } from '../context/ShopContext';
 import { formatVND, formatDate } from '../utils/format';
+import { PaymentQRCard } from '../components/PaymentQRCard';
 
 export const OrderSuccessView: React.FC = () => {
   const { latestOrder, setActiveTab } = useShop();
@@ -114,33 +115,21 @@ export const OrderSuccessView: React.FC = () => {
         </div>
       </div>
 
-      {/* Special QR code payment box if Bank Transfer selected */}
-      {latestOrder.paymentMethod === 'banking' && (
-        <div className="p-6 rounded-2xl bg-zinc-900/90 border border-zinc-700 flex flex-col sm:flex-row items-center gap-6">
-          <div className="w-40 h-40 bg-white p-2 rounded-xl shrink-0 flex items-center justify-center shadow-lg">
-            {/* Visual VietQR representation */}
-            <div className="w-full h-full border-2 border-black p-2 flex flex-col items-center justify-between text-center">
-              <div className="text-[9px] font-bold tracking-widest uppercase">VIETQR • MB BANK</div>
-              <QrCode className="w-20 h-20 text-black" />
-              <div className="text-[8px] font-mono font-semibold">CARA - {latestOrder.id}</div>
-            </div>
-          </div>
-
-          <div className="space-y-2 text-xs text-zinc-300">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">
-              Quét Mã QR Chuyển Khoản Ngân Hàng
-            </h4>
-            <p className="text-zinc-400">
-              Vui lòng chuyển khoản chính xác số tiền để đơn hàng được xuất kho tự động:
-            </p>
-            <div className="grid grid-cols-2 gap-2 p-3 bg-zinc-950 rounded-lg border border-zinc-800 font-mono text-[11px]">
-              <div>Ngân hàng: <strong className="text-white">MB Bank</strong></div>
-              <div>Số TK: <strong className="text-white">8888 6828 9999</strong></div>
-              <div>Số tiền: <strong className="text-emerald-400">{formatVND(latestOrder.total)}</strong></div>
-              <div>Nội dung: <strong className="text-white">{latestOrder.id}</strong></div>
-            </div>
-          </div>
-        </div>
+      {/* Special QR code payment box if Bank Transfer or E-Wallet selected */}
+      {(latestOrder.paymentMethod === 'banking' || latestOrder.paymentMethod === 'momo') && (
+        <PaymentQRCard
+          amount={latestOrder.total}
+          orderId={latestOrder.id}
+          customerName={latestOrder.customer.fullName}
+          defaultMethod={latestOrder.paymentMethod === 'momo' ? 'momo' : 'banking'}
+          title={
+            latestOrder.paymentMethod === 'momo'
+              ? 'Mã QR Thanh Toán Ví Điện Tử & Ứng Dụng Ngân Hàng'
+              : 'Mã VietQR MB Bank — Quét Để Hoàn Tất Đơn Hàng'
+          }
+          subtitle={`Mã đơn hàng: ${latestOrder.id} • Vui lòng chuyển khoản đúng số tiền để hệ thống xác nhận tự động.`}
+          isOrderConfirmed={true}
+        />
       )}
 
       {/* Order Details & Summary Breakdown */}

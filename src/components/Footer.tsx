@@ -67,9 +67,9 @@ export const Footer: React.FC = () => {
               <MapPin className="w-5 h-5 text-zinc-300" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-white tracking-wide">Showroom Hà Nội & TP.HCM</h4>
+              <h4 className="text-sm font-semibold text-white tracking-wide">Showroom TP. Hồ Chí Minh</h4>
               <p className="text-xs text-zinc-400 mt-1">
-                Trực tiếp trải nghiệm không gian trang sức tối giản và dịch vụ tùy biến theo số đo.
+                140 Lê Trọng Tấn, P. Tây Thạnh - Trải nghiệm trang sức bạc và đo ni tay trực tiếp.
               </p>
             </div>
           </div>
@@ -87,20 +87,24 @@ export const Footer: React.FC = () => {
             </p>
 
             <div className="space-y-2 text-xs text-zinc-400 pt-2">
-              <div className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-zinc-300 shrink-0" />
-                <span>Showroom HN: 88 Phố Huế, Q. Hai Bà Trưng, Hà Nội</span>
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <span className="text-zinc-300">
+                  <strong className="text-white">Địa chỉ:</strong> 140 Lê Trọng Tấn, Phường Tây Thạnh, TP Hồ Chí Minh
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-zinc-300 shrink-0" />
-                <span>Showroom HCM: 142 Nam Kỳ Khởi Nghĩa, Q. 1, TP. Hồ Chí Minh</span>
+                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>
+                  <strong className="text-white">Hotline HCM:</strong>{' '}
+                  <a href="tel:0775610065" className="font-mono text-zinc-200 hover:text-amber-300 font-bold">
+                    0775610065
+                  </a>{' '}
+                  (09:00 - 21:30)
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-zinc-300 shrink-0" />
-                <span>Hotline tư vấn: 1900 6828 (09:00 - 21:30)</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-zinc-300 shrink-0" />
+                <Mail className="w-4 h-4 text-sky-400 shrink-0" />
                 <span>Email: contact@carajewelry.vn</span>
               </div>
             </div>
@@ -113,46 +117,28 @@ export const Footer: React.FC = () => {
               <li>
                 <button
                   type="button"
-                  onClick={() => handleNav('catalog', 'vong-tay')}
-                  className="hover:text-white transition"
-                >
-                  Vòng tay bạc S925
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => handleNav('catalog', 'day-chuyen')}
-                  className="hover:text-white transition"
-                >
-                  Dây chuyền bạc Unisex
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => handleNav('catalog', 'nhan')}
-                  className="hover:text-white transition"
-                >
-                  Nhẫn bạc tối giản
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => handleNav('catalog', 'khuyen-tai')}
-                  className="hover:text-white transition"
-                >
-                  Khuyên tai bạc nguyên khối
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
                   onClick={() => handleNav('catalog', 'all')}
                   className="hover:text-white transition"
                 >
-                  Tất cả sản phẩm
+                  Tất cả vòng & lắc tay
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('catalog', 'vong-tay')}
+                  className="hover:text-white transition"
+                >
+                  Vòng tay bạc (Cuff & Bangle)
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('catalog', 'lac-tay')}
+                  className="hover:text-white transition"
+                >
+                  Lắc tay bạc (Cuban & Marine)
                 </button>
               </li>
             </ul>
@@ -185,6 +171,15 @@ export const Footer: React.FC = () => {
               <li>
                 <button type="button" onClick={() => handleNav('contact')} className="hover:text-white transition">
                   Chính sách giao hàng & COD
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('order-management')}
+                  className="text-zinc-500 hover:text-zinc-300 transition text-[11px] pt-1 block"
+                >
+                  🔒 Cổng Quản Trị Viên
                 </button>
               </li>
             </ul>

@@ -96,7 +96,7 @@ export const ProductDetailModal: React.FC = () => {
               {/* Category & Rating */}
               <div className="flex items-center justify-between">
                 <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">
-                  {selectedProduct.categoryName} • Mã SP: {selectedProduct.id.toUpperCase()}
+                  {selectedProduct.categoryName} • Mã SKU: <span className="text-amber-300 font-mono font-bold">{selectedProduct.sku || selectedProduct.modelCode}</span>
                 </span>
                 <div className="flex items-center gap-1.5 text-zinc-300">
                   <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
@@ -112,9 +112,16 @@ export const ProductDetailModal: React.FC = () => {
 
               {/* Price */}
               <div className="flex items-baseline gap-3 pb-2 border-b border-zinc-800/80">
-                <span className="text-2xl font-bold text-white tracking-tight">
-                  {formatVND(selectedProduct.price)}
-                </span>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-2xl font-bold text-white tracking-tight">
+                    {formatVND(selectedProduct.price)}
+                  </span>
+                  {selectedProduct.coupleItem && (
+                    <span className="text-sm font-semibold text-rose-300">
+                      / cặp
+                    </span>
+                  )}
+                </div>
                 {selectedProduct.originalPrice && (
                   <span className="text-sm text-zinc-500 line-through">
                     {formatVND(selectedProduct.originalPrice)}
@@ -124,6 +131,21 @@ export const ProductDetailModal: React.FC = () => {
                   Chuẩn Bạc 925
                 </span>
               </div>
+
+              {/* SEO Keywords tags */}
+              {selectedProduct.seoKeywords && selectedProduct.seoKeywords.length > 0 && (
+                <div className="flex items-center flex-wrap gap-1.5 text-[11px]">
+                  <span className="text-zinc-500 font-medium">Gợi ý tìm kiếm:</span>
+                  {selectedProduct.seoKeywords.map((kw) => (
+                    <span
+                      key={kw}
+                      className="px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300"
+                    >
+                      #{kw}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               {/* Material Highlight */}
               <div className="bg-zinc-900/90 rounded-xl p-3.5 border border-zinc-800/80 flex items-start gap-3">
@@ -142,6 +164,20 @@ export const ProductDetailModal: React.FC = () => {
               <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                 {selectedProduct.description}
               </p>
+
+              {/* Special Product Callouts */}
+              {selectedProduct.coupleItem && (
+                <div className="bg-rose-950/30 border border-rose-800/40 rounded-lg p-3 text-xs text-rose-200 flex items-center gap-2">
+                  <span className="font-semibold text-rose-300">Set Đôi:</span>
+                  <span>Tặng kèm hộp quà tình nhân CARA & thiệp chúc mừng cao cấp.</span>
+                </div>
+              )}
+              {selectedProduct.engravingOption && (
+                <div className="bg-zinc-800/60 border border-zinc-700/60 rounded-lg p-3 text-xs text-zinc-200 flex items-center gap-2">
+                  <span className="font-semibold text-white">Khắc Tên Laser:</span>
+                  <span>Miễn phí khắc tên hoặc ngày kỷ niệm theo yêu cầu khi đặt hàng.</span>
+                </div>
+              )}
 
               {/* Size Selector */}
               <div className="space-y-2">

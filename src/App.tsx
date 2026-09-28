@@ -12,6 +12,7 @@ import { CartView } from './views/CartView';
 import { CheckoutView } from './views/CheckoutView';
 import { OrderSuccessView } from './views/OrderSuccessView';
 import { OrderHistoryView } from './views/OrderHistoryView';
+import { OrderManagementView } from './views/OrderManagementView';
 import { AboutView } from './views/AboutView';
 import { ContactView } from './views/ContactView';
 
@@ -31,6 +32,7 @@ const MainLayout: React.FC = () => {
         {activeTab === 'checkout' && <CheckoutView />}
         {activeTab === 'order-success' && <OrderSuccessView />}
         {activeTab === 'order-history' && <OrderHistoryView />}
+        {activeTab === 'order-management' && <OrderManagementView />}
         {activeTab === 'about' && <AboutView />}
         {activeTab === 'contact' && <ContactView />}
       </main>

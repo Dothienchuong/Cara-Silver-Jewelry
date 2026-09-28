@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { useShop } from '../context/ShopContext';
 import { CustomerInfo, PaymentMethod } from '../types';
 import { formatVND } from '../utils/format';
+import { PaymentQRCard } from '../components/PaymentQRCard';
 
 export const CheckoutView: React.FC = () => {
   const { cart, cartSubtotal, shippingFee, discountAmount, grandTotal, createOrder, setActiveTab } = useShop();
@@ -13,7 +14,7 @@ export const CheckoutView: React.FC = () => {
     phone: '',
     email: '',
     address: '',
-    city: 'Hà Nội',
+    city: 'TP. Hồ Chí Minh',
     district: '',
     note: '',
   });
@@ -167,8 +168,8 @@ export const CheckoutView: React.FC = () => {
                     className="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3.5 py-2 text-xs text-white focus:outline-none focus:border-zinc-400"
                     id="checkout-city-select"
                   >
-                    <option value="Hà Nội">Hà Nội</option>
                     <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                    <option value="Hà Nội">Hà Nội</option>
                     <option value="Đà Nẵng">Đà Nẵng</option>
                     <option value="Hải Phòng">Hải Phòng</option>
                     <option value="Cần Thơ">Cần Thơ</option>
@@ -183,7 +184,7 @@ export const CheckoutView: React.FC = () => {
                   <input
                     type="text"
                     name="district"
-                    placeholder="Quận Hai Bà Trưng, v.v."
+                    placeholder="Quận Tân Phú, v.v."
                     value={formData.district}
                     onChange={handleChange}
                     className="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-400"
@@ -199,7 +200,7 @@ export const CheckoutView: React.FC = () => {
                   type="text"
                   name="address"
                   required
-                  placeholder="Số 88 Phố Huế, Phường Hàng Bài"
+                  placeholder="140 Lê Trọng Tấn, Phường Tây Thạnh"
                   value={formData.address}
                   onChange={handleChange}
                   className="w-full bg-zinc-950 border border-zinc-700 rounded-lg px-3.5 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-400"
@@ -296,18 +297,15 @@ export const CheckoutView: React.FC = () => {
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
-                        className="mt-3 p-3.5 bg-zinc-950 rounded-lg border border-zinc-700 space-y-2 text-xs"
+                        className="mt-4 pt-3 border-t border-zinc-800 space-y-3"
                       >
-                        <div className="text-zinc-300 font-medium">Thông tin tài khoản chính thức:</div>
-                        <div className="grid grid-cols-2 gap-2 text-zinc-400">
-                          <div>Ngân hàng: <strong className="text-white">MB Bank</strong></div>
-                          <div>Số TK: <strong className="text-white font-mono">8888 6828 9999</strong></div>
-                          <div>Chủ TK: <strong className="text-white">CARA SILVER JEWELRY</strong></div>
-                          <div>Chi nhánh: <strong className="text-white">Hà Nội Flagship</strong></div>
-                        </div>
-                        <p className="text-[11px] text-zinc-500 italic pt-1 border-t border-zinc-800">
-                          * Mã QR thanh toán chi tiết kèm cú pháp tự động sẽ hiển thị ngay sau khi xác nhận đơn.
-                        </p>
+                        <PaymentQRCard
+                          amount={grandTotal}
+                          orderId={`CARA-${formData.phone ? formData.phone.slice(-4) : 'DH'}`}
+                          defaultMethod="banking"
+                          title="Mã VietQR MB Bank — Quét Thanh Toán Nhanh"
+                          subtitle="Quét mã bằng app MB Bank hoặc bất kỳ ngân hàng nào để tự động điền số tiền"
+                        />
                       </motion.div>
                     )}
                   </div>
@@ -334,12 +332,28 @@ export const CheckoutView: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <CreditCard className="w-4 h-4 text-pink-400" />
                       <span className="text-xs font-bold text-white uppercase tracking-wider">
-                        Ví Điện Tử (MoMo / ZaloPay)
+                        Ví Điện Tử (ZaloPay / MoMo / QR Đa Năng)
                       </span>
                     </div>
                     <p className="text-xs text-zinc-400 mt-1">
-                      Thanh toán an toàn, tức thì qua cổng ví điện tử phổ biến.
+                      Nhận tiền từ mọi ứng dụng: ZaloPay, MoMo, MB Bank, Vietcombank, Techcombank và 50+ app.
                     </p>
+
+                    {paymentMethod === 'momo' && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="mt-4 pt-3 border-t border-zinc-800 space-y-3"
+                      >
+                        <PaymentQRCard
+                          amount={grandTotal}
+                          orderId={`CARA-${formData.phone ? formData.phone.slice(-4) : 'DH'}`}
+                          defaultMethod="momo"
+                          title="Mã QR Đa Năng — ZaloPay & 50+ Ngân Hàng"
+                          subtitle="Mở ZaloPay, MoMo hoặc app ngân hàng để quét mã nhận tiền tức thì"
+                        />
+                      </motion.div>
+                    )}
                   </div>
                 </label>
               </div>
